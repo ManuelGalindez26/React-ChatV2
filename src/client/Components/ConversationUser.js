@@ -1,0 +1,85 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
+import Discussions from './Discussions';
+
+
+export default class ConversationUser extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      active: false,
+      username: [],
+      avatar: []
+    }
+
+    this._onSubmit = this._onSubmit.bind(this);
+    this._onChange = this._onChange.bind(this);
+  }
+
+  componentDidMount(){
+    setTimeout(() => {
+      this.setState({
+        active : true
+      })
+    },1)
+  }
+
+  _onChange(input) {
+    let setValue = {}
+    setValue[input.target.name] = input.target.value;
+    this.setState(setValue);
+  }
+
+  _onSubmit(ev) {
+    ev.preventDefault();
+    ReactDOM.unmountComponentAtNode(document.getElementById('conversation'));
+    ReactDOM.render(<Discussions
+      username={this.state.username}
+      avatar={this.state.avatar}/>,
+      document.getElementById('conversation')
+    );
+  }
+
+  render(){
+
+    let form;
+
+    if ( this.state.active ) {
+      form = <form className="conversationUser">
+        <label className="labelA">Insert you username</label>
+        <input
+          className="inputA"
+          type="text"
+          name="username"
+          placeholder="Write you username"
+          onChange={this._onChange}></input>
+        <label className="labelA">Insert you avatar</label>
+        <input
+          className="inputA"
+          type="text"
+          name="avatar"
+          placeholder="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unof.svg.png"
+          onChange={this._onChange}></input>
+
+        <button
+        className="btn-sub"
+        type="submit"
+        onClick={this._onSubmit}>
+        Send</button>
+      </form>
+
+    } else {
+      form = null
+    }
+    return <CSSTransitionGroup
+      transitionName="opacity"
+      transitionEnterTimeout={300}
+      transitionLeaveTimeout={300}>
+      { form }
+    </CSSTransitionGroup>
+
+  }
+
+}

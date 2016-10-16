@@ -1,0 +1,37 @@
+@import 'nib'
+@import 'normalize'
+@import 'util'
+@import 'colours'
+@import 'formsUI'
+
+body
+  font-size 16px
+
+.conversationUser
+	display flex
+	flex-direction column
+	justify-content center
+	min-height 100vh
+
+	> *
+		margin-bottom 1.2em
+
+	.labelA
+    margin-bottom .5em
+
+
+.opacity-enter
+    opacity 0.01
+    transition .3s
+    transform scale(.9)
+    &.opacity-enter-active
+        opacity 1
+        transform scale(1)
+
+.opacity-leave
+    opacity 1
+    transition .3s
+
+    &.opacity-leave-active
+        opacity 0
+        transform scale(.9)
