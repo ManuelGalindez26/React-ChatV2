@@ -1,7 +1,12 @@
 import React from 'react';
 
 export default function Discussions(props){
-  return <h1>
-    { `${props.username} ${props.avatar}` }
-  </h1>
+  return <div>
+    <h1>
+      { `${props.username}` }
+    </h1>
+
+    <img src={props.avatar} width="30" height="30" />
+
+  </div>
 }
