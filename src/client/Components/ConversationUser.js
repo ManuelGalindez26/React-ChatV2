@@ -29,7 +29,6 @@ export default class ConversationUser extends React.Component {
   _onChange(input) {
     const setValue = {};
     setValue[input.target.name] = input.target.value;
-    console.log(setValue);
     this.setState(setValue);
   }
 
@@ -39,7 +38,7 @@ export default class ConversationUser extends React.Component {
     let name, avatar;
 
     if ( this.state.username === '' ) {
-      name = 'Anonimo';
+      name = 'Anonymous';
     } else {
       name = this.state.username;
     }
@@ -72,24 +71,26 @@ export default class ConversationUser extends React.Component {
     let form;
 
     if ( this.state.active ) {
-      form = <form onSubmit={this._onSubmit} className="conversationUser">
-        <label className="labelA">Insert you username</label>
-        <input
-          className="inputA"
-          type="text"
-          name="username"
-          placeholder="Write you username"
-          onChange={this._onChange} />
-        <label className="labelA">Insert you avatar</label>
-        <input
-          className="inputA"
-          type="text"
-          name="avatar"
-          placeholder="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unof.svg.png"
-          onChange={this._onChange} />
+      form = <div className="discussions-wrapper">
+        <form onSubmit={this._onSubmit} className="conversationUser">
+          <label className="labelA">Insert you username</label>
+          <input
+            className="inputA"
+            type="text"
+            name="username"
+            placeholder="Write you username"
+            onChange={this._onChange} />
+          <label className="labelA">Paste you url avatar</label>
+          <input
+            className="inputA"
+            type="text"
+            name="avatar"
+            placeholder="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unof.svg.png"
+            onChange={this._onChange} />
 
-        <input className="btn-sub" type="submit" value="Send"/>
-      </form>
+          <input className="btn-sub" type="submit" value="Send"/>
+        </form>
+      </div>
 
     } else {
       form = null

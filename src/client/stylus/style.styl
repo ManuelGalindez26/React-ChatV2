@@ -7,6 +7,13 @@
 body
   font-size 16px
 
+h1
+h2
+h3
+figure
+  margin 0
+  padding 0
+
 .conversationUser
 	display flex
 	flex-direction column
@@ -18,6 +25,32 @@ body
 
 	.labelA
     margin-bottom .5em
+
+.conversationBody
+  display flex
+  min-height 100vh
+  flex-direction column
+  justify-content space-between
+
+.header-user
+  background greens
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  justify-content space-between
+  align-items center
+  padding .4em
+  z-index 1
+
+
+  &-username
+    font-size 1.2em
+    color #FFF
+    font-weight bold
+
+.avatar
+  > img
+      border-radius 50%
 
 
 .opacity-enter
@@ -35,3 +68,40 @@ body
     &.opacity-leave-active
         opacity 0
         transform scale(.9)
+
+.Message
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  align-items center
+
+.Message-list
+  height 80vh
+  display flex
+  flex-direction column-reverse
+  padding 20px
+  overflow-y auto
+  width 100%
+  box-sizing border-box
+
+
+.Message-form
+  > textarea
+      box-sizing border-box
+      width 100%
+      resize none
+      padding .8em
+      outline 0
+      border 0
+      border 1px solid #ccc
+      height 47px
+      border-radius 5px
+
+
+.Message-username
+  font-size 1em
+  color blues
+  margin-right .5em
+
+.Message-avatar
+  margin-right 1em

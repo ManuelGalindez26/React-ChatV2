@@ -1,6 +1,8 @@
 import express from 'express';
+import http from 'http';
 import engine from 'react-engine';
 import path from 'path';
+import sckengine from 'socket.io';
 
 
 const port = process.env.PORT || 3000;
@@ -15,7 +17,6 @@ app.engine('.jsx', engine.server.create());
 //Configuramos las rutas de las vistas
 app.set('views', path.join(__dirname, '../client/views'));
 
-
 //Indicamos que el engine a usar es el de archivos .jsx
 app.set('view engine', 'jsx');
 
@@ -24,4 +25,15 @@ app.set('view', engine.expressView);
 
 app.get('/', (req, res) => res.render('index', { title: 'Chat using React.js' }));
 
-app.listen(port, () => console.log(`Server listen in localhost ${port}`));
+let server = http.createServer(app).listen(port, () => console.log(`Server listen in localhost ${port}`) )
+
+const io = sckengine.listen(server);
+
+io.on('connection', (socket) => {
+  console.log('New user connect');
+
+  socket.on('new messages', (msj) => {
+  	io.emit('message', msj);
+  })
+
+})
