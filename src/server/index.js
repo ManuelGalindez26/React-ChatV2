@@ -30,10 +30,10 @@ let server = http.createServer(app).listen(port, () => console.log(`Server liste
 const io = sckengine.listen(server);
 
 io.on('connection', (socket) => {
-  console.log('New user connect');
+  console.log(`New user connect ${socket.id}`);
 
-  socket.on('new messages', (msj) => {
-  	io.emit('message', msj);
+  socket.on('new-message', (msg) => {
+    io.emit('message', msg);
   })
 
 })

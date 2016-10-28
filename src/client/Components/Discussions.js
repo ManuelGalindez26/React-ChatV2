@@ -1,5 +1,6 @@
 import React from 'react';
 import io from 'socket.io-client';
+import uid from 'uid';
 import MessageList from './MessageList';
 
 
@@ -10,32 +11,42 @@ export default class Discussions extends React.Component {
     this.state = { messages: [] };
     this._dataValue = this._dataValue.bind(this);
     this._MessageSend = this._MessageSend.bind(this);
+    this.user = uid(10);
   }
 
   componentDidMount(){
     this.socket = io('localhost:3000');
+
+    this.socket.on('message', (message) => {
+      if (message.user !== this.user) {
+        this._MessageSend(message);
+      }
+    })
   }
 
-  _dataValue(text) {
-    let textValue = text.target.value;
+  _dataValue(ev) {
+
+    ev.preventDefault();
+
+    let textValue = document.getElementById('textarea').value;
     const avatar = this.props.avatar;
     const username = this.props.username;
 
-    let message = { avatar: avatar, username: username, message: textValue };
-    this.state.messages.push( message );
+    if ( textValue !== '' ) {
+
+      let message = { avatar: avatar, username: username, message: textValue };
+      this._MessageSend(message);
+      this.socket.emit('new-message', message);
+      document.getElementById('textarea').value = '';
+    }
+
   }
 
-  _MessageSend(ev) {
-    ev.preventDefault();
-    let MessageGlobal = this.state.messages;
+  _MessageSend(message) {
 
-    for ( let cont = 0; cont <= MessageGlobal.length -1; cont++) {
-      if ( cont === MessageGlobal.length -1 ) {
-        let dataMessage = [ MessageGlobal[cont] ];
-        this.setState({ messages: dataMessage })
-      }
-    }
-    document.getElementById('textarea').value = '';
+    this.state.messages.push( message );
+    let MessageGlobal = this.state.messages;
+    this.setState({ messages: MessageGlobal });
   }
 
   render(){
@@ -56,8 +67,8 @@ export default class Discussions extends React.Component {
 
 
       <form className="Message-form" method="POST">
-        <textarea id="textarea" placeholder="Write message..." onChange={this._dataValue}></textarea>
-        <button type="submit" onClick={ this._MessageSend }>Click</button>
+        <textarea id="textarea" placeholder="Write message..."></textarea>
+        <button type="submit" onClick={ this._dataValue }>Send</button>
       </form>
 
     </div>
