@@ -31,11 +31,11 @@ export default class Discussions extends React.Component {
     let textValue = document.getElementById('textarea').value;
     const avatar = this.props.avatar;
     const username = this.props.username;
+    let message = { avatar: avatar, username: username, message: textValue };
 
     if ( textValue !== '' ) {
 
-      let message = { avatar: avatar, username: username, message: textValue };
-      this._MessageSend(message);
+    
       this.socket.emit('new-message', message);
       document.getElementById('textarea').value = '';
     }
@@ -43,7 +43,6 @@ export default class Discussions extends React.Component {
   }
 
   _MessageSend(message) {
-
     this.state.messages.push( message );
     let MessageGlobal = this.state.messages;
     this.setState({ messages: MessageGlobal });
