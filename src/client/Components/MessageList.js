@@ -8,6 +8,7 @@ export default function MessageList (props){
 
         let id = uid()
 
+
         return <article key={id} className="Message">
           <figure className="avatar Message-avatar">
             <img title={ item.username } src={ item.avatar } width="40" height="40" />
@@ -21,6 +22,7 @@ export default function MessageList (props){
             </div>
           </div>
         </article>
+
       })
     }
   </div>

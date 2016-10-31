@@ -8,7 +8,7 @@ export default class Discussions extends React.Component {
 
   constructor(props){
     super(props)
-    this.state = { messages: [] };
+    this.state = { messages: [], connectUser: [] };
     this._dataValue = this._dataValue.bind(this);
     this._MessageSend = this._MessageSend.bind(this);
     this.user = uid(10);
@@ -22,6 +22,12 @@ export default class Discussions extends React.Component {
         this._MessageSend(message);
       }
     })
+
+    this.socket.on('loggin', (onUser) => {
+      this.state.connectUser.push(onUser);
+      console.log(this.state.connectUser);
+    })
+
   }
 
   _dataValue(ev) {
@@ -35,11 +41,9 @@ export default class Discussions extends React.Component {
 
     if ( textValue !== '' ) {
 
-    
       this.socket.emit('new-message', message);
       document.getElementById('textarea').value = '';
     }
-
   }
 
   _MessageSend(message) {

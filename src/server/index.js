@@ -29,11 +29,21 @@ let server = http.createServer(app).listen(port, () => console.log(`Server liste
 
 const io = sckengine.listen(server);
 
+let contUser = 0;
+
 io.on('connection', (socket) => {
-  console.log(`New user connect ${socket.id}`);
+
+  ++contUser;
+  console.log(`New user connect ${socket.id}, users connect: ${contUser}`);
 
   socket.on('new-message', (msg) => {
     io.emit('message', msg);
+  })
+
+  socket.on('disconnect', () => {
+    --contUser;
+    console.log(`New user disconnect ${socket.id}, users connect: ${contUser}`);
+
   })
 
 })
