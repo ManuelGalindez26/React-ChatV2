@@ -19,6 +19,8 @@ export default class ConversationUser extends React.Component {
   }
 
   componentDidMount(){
+    Notification.requestPermission();
+
     setTimeout(() => {
       this.setState({
         active : true

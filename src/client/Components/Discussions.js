@@ -2,19 +2,20 @@ import React from 'react';
 import io from 'socket.io-client';
 import uid from 'uid';
 import MessageList from './MessageList';
-
+import Notification from './Notification';
 
 export default class Discussions extends React.Component {
 
   constructor(props){
     super(props)
-    this.state = { messages: [], connectUser: [] };
+    this.state = { messages: [] };
     this._dataValue = this._dataValue.bind(this);
     this._MessageSend = this._MessageSend.bind(this);
     this.user = uid(10);
   }
 
   componentDidMount(){
+
     this.socket = io('localhost:3000');
 
     this.socket.on('message', (message) => {
@@ -22,26 +23,22 @@ export default class Discussions extends React.Component {
         this._MessageSend(message);
       }
     })
-
-    this.socket.on('loggin', (onUser) => {
-      this.state.connectUser.push(onUser);
-      console.log(this.state.connectUser);
-    })
-
   }
+
 
   _dataValue(ev) {
 
     ev.preventDefault();
 
     let textValue = document.getElementById('textarea').value;
+
     const avatar = this.props.avatar;
     const username = this.props.username;
     let message = { avatar: avatar, username: username, message: textValue };
 
     if ( textValue !== '' ) {
-
       this.socket.emit('new-message', message);
+      Notification(message);
       document.getElementById('textarea').value = '';
     }
   }
