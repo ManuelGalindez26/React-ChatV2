@@ -10,7 +10,7 @@ export default function Index (props) {
   </head>
   <body>
     <section className="container">
-      <div className="conversation-wrapper" id="conversation">
+      <div className="" id="conversation">
 
       </div>
     </section>
