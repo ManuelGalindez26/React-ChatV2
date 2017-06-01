@@ -50,22 +50,20 @@ export default class Discussions extends React.Component {
     this.state.messages.push( message );
     let MessageGlobal = this.state.messages;
     this.setState({ messages: MessageGlobal });
-    
+
     contMessage.scrollTop = contMessage.scrollHeight;
   }
 
   render(){
     return <section className="conversationBody">
-      <div className="header-user">
-        <figure className="avatar">
-          <img src={this.props.avatar} width="30" height="30" />
+      <header className="header-user">
+        <figure className="logo">
+          <img src="images/logo.png" width="130" height="100" />
         </figure>
-
-        <h2 className="header-user-username">
-          { `${this.props.username}` }
-        </h2>
-      </div>
-
+        <figure className="avatar">
+          <img src={this.props.avatar} width="40" height="40" />
+        </figure>
+      </header>
 
       <MessageList
         messages={this.state.messages}/>

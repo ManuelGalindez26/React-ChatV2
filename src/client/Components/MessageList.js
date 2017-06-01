@@ -14,6 +14,7 @@ export default function MessageList (props){
           </figure>
           <div className="Message-Body">
             <div>
+              <h4>{item.username}</h4>
               <p>
                 { item.message }
               </p>
