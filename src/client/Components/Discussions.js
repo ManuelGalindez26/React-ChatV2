@@ -25,12 +25,19 @@ export default class Discussions extends React.Component {
     })
 
     const textValue = document.getElementById('textarea');
+    const btn_send = document.getElementById('btn_send');
     textValue.addEventListener('keypress', event => {
       if ( event.keyCode === 13){
         this._dataValue(textValue);
         event.preventDefault();
       }
     })
+
+    btn_send.addEventListener('click', ev => {
+      ev.preventDefault();
+      this._dataValue(textValue);
+    })
+
   }
 
   _dataValue(valueMsj) {
@@ -75,7 +82,7 @@ export default class Discussions extends React.Component {
           placeholder="Write message..."
           autoComplete="false"
           autoFocus="true"></textarea>
-        <button type="submit">
+        <button id="btn_send" type="submit">
           <i className="material-icons">send</i>
         </button>
       </form>
