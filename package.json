@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "stylus": "stylus -u nib -c -o public src/client/stylus/style.styl",
-    "build": "browserify -t babelify src/client/app.js > public/bundle.js",
+    "build": "NODE_ENV=production browserify -t babelify -g uglifyify src/client/app.js > public/bundle.js",
     "server": "babel-node src/server/index.js",
     "start": "npm run stylus && npm run build && npm run server"
   },
@@ -20,7 +20,8 @@
     "express": "^4.14.0",
     "nib": "^1.1.2",
     "react-engine": "^4.1.0",
-    "stylus": "^0.54.5"
+    "stylus": "^0.54.5",
+    "uglifyify": "^3.0.4"
   },
   "dependencies": {
     "react": "^15.3.2",

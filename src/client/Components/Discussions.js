@@ -68,7 +68,7 @@ export default class Discussions extends React.Component {
       <MessageList
         messages={this.state.messages}/>
 
-      <form className="Message-form" method="POST">
+      <form className="Message-form" method="POST" onSubmit={this._dataValue}>
         <textarea
           id="textarea"
           rows="1"

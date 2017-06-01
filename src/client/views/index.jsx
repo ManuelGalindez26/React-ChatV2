@@ -8,6 +8,7 @@ export default function Index (props) {
     <title>{ props.title }</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="shortcut icon" href="images/logo.png" />
   </head>
   <body>
     <section className="container">

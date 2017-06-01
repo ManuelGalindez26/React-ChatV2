@@ -75,6 +75,12 @@ export default class ConversationUser extends React.Component {
     if ( this.state.active ) {
       form = <div className="discussions-wrapper">
         <form onSubmit={this._onSubmit} className="conversationUser">
+
+          <div>
+            <img src="images/logo.png" width="200" height="150" />
+          </div>
+            
+
           <label className="labelA">Insert you username</label>
           <input
             className="inputA"
