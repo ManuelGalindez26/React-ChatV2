@@ -27,61 +27,61 @@ export default class Discussions extends React.Component {
     const textValue = document.getElementById('textarea');
     textValue.addEventListener('keypress', event => {
       if ( event.keyCode === 13){
-        this._dataValue();
+        this._dataValue(textValue);
         event.preventDefault();
       }
     })
   }
 
-  _dataValue() {
-    const textValue = document.getElementById('textarea');
+  _dataValue(valueMsj) {
     const avatar = this.props.avatar;
     const username = this.props.username;
-    let message = { avatar: avatar, username: username, message: textValue.value };
+    let message = { avatar: avatar, username: username, message: valueMsj.value };
 
-    if ( textValue.value !== '' ) {
+    if ( valueMsj.value !== '' ) {
       this.socket.emit('new-message', message);
       Notification(message);
-      textValue.value = '';
+      valueMsj.value = '';
     }
   }
 
   _Message(message) {
+    const contMessage = document.getElementById('MessageList');
     this.state.messages.push( message );
     let MessageGlobal = this.state.messages;
     this.setState({ messages: MessageGlobal });
+    
+    contMessage.scrollTop = contMessage.scrollHeight;
   }
 
   render(){
-    return <div className="conversationBody">
-      <header className="header-user">
+    return <section className="conversationBody">
+      <div className="header-user">
+        <figure className="avatar">
+          <img src={this.props.avatar} width="30" height="30" />
+        </figure>
 
-      <figure className="avatar">
-        <img src={this.props.avatar} width="30" height="30" />
-      </figure>
+        <h2 className="header-user-username">
+          { `${this.props.username}` }
+        </h2>
+      </div>
 
-      <h2 className="header-user-username">
-        { `${this.props.username}` }
-      </h2>
 
-      </header>
+      <MessageList
+        messages={this.state.messages}/>
 
-      <section className="Message-list">
-        <MessageList
-          messages={this.state.messages}/>
+      <form className="Message-form" method="POST">
+        <textarea
+          id="textarea"
+          rows="1"
+          placeholder="Write message..."
+          autoComplete="false"
+          autoFocus="true"></textarea>
+        <button type="submit">
+          <i className="material-icons">send</i>
+        </button>
+      </form>
 
-        <form className="Message-form" method="POST">
-          <textarea
-            id="textarea"
-            rows="1"
-            placeholder="Write message..."
-            autoComplete="false"
-            autoFocus="true"></textarea>
-          <button type="submit">Send</button>
-        </form>
-
-      </section>
-
-    </div>
+    </section>
   }
 }

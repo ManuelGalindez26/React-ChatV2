@@ -28,89 +28,46 @@ figure
 
 .conversationBody
   display flex
-  min-height 100vh
-  flex-direction row
-  justify-content space-between
-
-.header-user
-  background purpe
-  display flex
   flex-direction column
-  flex-wrap wrap
-  padding .4em
-  text-align center
-  width 300px
-  z-index 1
-
-
-  &-username
-    font-size 1.2em
-    color #FFF
-    font-weight bold
-
-.avatar
-  > img
-      border-radius 50%
-
-
-.opacity-enter
-    opacity 0.01
-    transition .3s
-    transform scale(.9)
-    &.opacity-enter-active
-        opacity 1
-        transform scale(1)
-
-.opacity-leave
-    opacity 1
-    transition .3s
-
-    &.opacity-leave-active
-        opacity 0
-        transform scale(.9)
-
-.Message
-  align-items center
-  display flex
-  flex-direction row
-  flex-wrap wrap
-  padding .1em
-  margin-bottom 1em
-
-.Message-list
-  height 98vh
   justify-content space-between
-  display flex
-  flex-direction column
-  padding 20px
-  overflow-y auto
+  height 100%
   width 100%
-  box-sizing border-box
-  > div
-      height 100%
-      display flex
-      flex-direction column
-      justify-content flex-end
 
+  .header-user
+    background purpe
+    padding 1em
 
-.Message-form
-  display flex
-  > textarea
-      box-sizing border-box
-      width 100%
-      resize none
-      padding .8em
-      outline 0
-      border 0
-      border 1px solid #ccc
-      height 47px
-      border-radius 5px
+  .ListMessage
+    box-sizing border-box
+    display flex
+    flex-direction column
+    height calc(100vh - 186.59px)
+    overflow-y auto
+    padding 20px
+    width 100%
 
+    .Message
+      margin-bottom .5em
+      &-avatar
+        float left
 
-.Message-username
-  font-size 1em
-  color blues
-  margin-right .5em
-
-.Message-avatar
-  margin-right 1em
+  .Message-form
+    position fixed
+    bottom 0
+    left 0
+    padding 20px 30px
+    display flex
+    align-items center
+    width 100%
+    box-sizing border-box
+    border-top 1px solid #dcdcdc
+    > textarea
+        border 1px solid #dddddc
+        border-radius 5px
+        color #273b47
+        font-size 16px
+        padding .8em
+        outline 0
+        font-family Lato,sans-serif
+        resize none
+        width 100%

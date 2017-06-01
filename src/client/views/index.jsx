@@ -7,12 +7,11 @@ export default function Index (props) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{ props.title }</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
   </head>
   <body>
     <section className="container">
-      <div className="" id="conversation">
-
-      </div>
+      <div className="" id="conversation"></div>
     </section>
     <script src="bundle.js"></script>
   </body>
