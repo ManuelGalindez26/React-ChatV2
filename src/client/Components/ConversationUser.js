@@ -19,8 +19,6 @@ export default class ConversationUser extends React.Component {
   }
 
   componentDidMount(){
-    Notification.requestPermission();
-
     setTimeout(() => {
       this.setState({
         active : true
@@ -79,7 +77,7 @@ export default class ConversationUser extends React.Component {
           <div>
             <img src="images/logo.png" width="200" height="150" />
           </div>
-            
+
 
           <label className="labelA">Insert you username</label>
           <input

@@ -2,7 +2,7 @@ import React from 'react';
 import io from 'socket.io-client';
 import uid from 'uid';
 import MessageList from './MessageList';
-import Notification from './Notification';
+import Notify from './Notification';
 
 export default class Discussions extends React.Component {
 
@@ -19,9 +19,7 @@ export default class Discussions extends React.Component {
     this.socket = io('http://localhost:3000');
 
     this.socket.on('message', (message) => {
-      if (message.user !== this.user) {
-        this._Message(message);
-      }
+      this._Message(message);
     })
 
     const textValue = document.getElementById('textarea');
@@ -47,8 +45,8 @@ export default class Discussions extends React.Component {
 
     if ( valueMsj.value !== '' ) {
       this.socket.emit('new-message', message);
-      Notification(message);
       valueMsj.value = '';
+      if (document.hidden) Notify(message);
     }
   }
 

@@ -1,17 +1,28 @@
-export default function Notification (obj) {
+export default function Notify (obj) {
 
-  let titulo = `Tienes un nuevo mensaje de ${obj.username}`;
-  let options = {
-    icon: `${obj.avatar}`,
-    body: obj.message
+  const title = `Tienes un mensaje nuevo de ${obj.username}`
+  const options = {
+    body: obj.message,
+    icon: obj.avatar,
+  };
+
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
   }
 
-  if(Notification) {
-    console.log('excelente');
-    if (Notification.permission === "granted"){
-       var newNoti = new Notification(titulo, options);
-       setTimeout(newNoti.close.bind(newNoti), 6000);
-    }
+  // Let's check whether notification permissions have already been granted
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification(title, options);
+  }
 
+  // Otherwise, we need to ask the user for permission
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user accepts, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification(title, options);
+      }
+    });
   }
 }
