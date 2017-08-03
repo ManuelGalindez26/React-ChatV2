@@ -1,4 +1,4 @@
-# React-ChatV2
+# Coffee-Chat
 Using socket-io and reactjs for development of chat realtime
 
 ### Installation
